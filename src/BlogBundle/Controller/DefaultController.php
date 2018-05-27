@@ -8,6 +8,22 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
+    	$em = $this->getDoctrine()->getEntityManager();
+    	$entry_repo = $em->getRepository("BlogBundle:Entry");
+
+    	$entries = $entry_repo->findAll();
+
+    	if(!empty($entries)){
+    		foreach ($entries as $key => $entry) {
+	    		echo $enty->getTitle().'<br>';
+	    		echo $enty->getCategory()->getName().'<br>';
+	    		echo $enty->getUser()->getName().'<br><hr>';
+	    	}
+    	}else{
+    		echo "There are no entries yet!<br><hr>";
+    	}
+    	
+
         return $this->render('BlogBundle:Default:index.html.twig');
     }
 }
