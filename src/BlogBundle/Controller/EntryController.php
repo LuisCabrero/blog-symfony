@@ -33,13 +33,20 @@ class EntryController extends Controller
         if($form->isSubmitted()){
             if($form->isValid()){
                 $em = $this->getDoctrine()->getEntityManager();
+                $category_repo = $em->getRepository("BlogBunde:Category");
+
 
                 $entry = new Entry();
-                /*$entry->setName($form->get("name")->getData());
-                $entry->setDescription($form->get("description")->getData());*/
+                $entry->setTitle($form->get("title")->getData());
+                $entry->setContent($form->get("content")->getData());
+                $entry->setStatus($form->get("status")->getData());
+                $entry->setImage(null);
+                $category = $category_repo->find($form->get("category")->getData());
+                $entry->setCategory($category);
+                $user = $this->getUser();
+                $entry->setUser($user);
 
                 $em->persist($entry);
-
                 $flush = $em->flush();
 
                 if($flush == null){

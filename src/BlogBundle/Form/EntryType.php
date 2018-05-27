@@ -38,8 +38,8 @@ class EntryType extends AbstractType
             ->add('status', ChoiceType::class, array(
                 'label' => 'Estado',
                 'choices' => array(
-                    "public" => "Publicado",
-                    "private" => "Privado"
+                    "Publicado" => "public",
+                    "Privado" => "private"
                 ),
                 'required' => 'required',
                 'attr' => array(
@@ -48,13 +48,13 @@ class EntryType extends AbstractType
             ))
             ->add('image', FileType::class, array(
                 'label' => 'Imagen',
-                'required' => 'required',
                 'attr' => array(
                     'class' => 'form-name form-control'
                 )
             ))
             ->add('category', EntityType::class, array(
                 'class' => 'BlogBundle:Category',
+                'label' => 'Categorias',
                 'attr' => array(
                     'class' => 'form-name form-control'
                 )
